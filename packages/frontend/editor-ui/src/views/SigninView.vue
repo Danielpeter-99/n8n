@@ -207,7 +207,7 @@ const cacheCredentials = (form: EmailOrLdapLoginIdAndPassword) => {
 </script>
 
 <template>
-	<div>
+	<div class="auth-container">
 		<AuthView
 			v-if="!showMfaView"
 			:form="formConfig"
@@ -216,6 +216,11 @@ const cacheCredentials = (form: EmailOrLdapLoginIdAndPassword) => {
 			data-test-id="signin-form"
 			@submit="onEmailPasswordSubmitted"
 		/>
+		<div v-if="!showMfaView" class="terms-privacy-text">
+			By signing in, you agree to our
+			<router-link to="/terms-of-use">Terms of Use</router-link> and
+			<router-link to="/privacy-policy">Privacy Policy</router-link>
+		</div>
 		<MfaView
 			v-if="showMfaView"
 			:report-error="reportError"
@@ -225,3 +230,25 @@ const cacheCredentials = (form: EmailOrLdapLoginIdAndPassword) => {
 		/>
 	</div>
 </template>
+
+<style lang="scss" scoped>
+.auth-container {
+	position: relative;
+}
+
+.terms-privacy-text {
+	text-align: center;
+	margin-top: 20px;
+	font-size: 0.85em;
+	color: var(--color-text-light);
+	
+	a {
+		color: var(--color-primary);
+		text-decoration: none;
+		
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+</style>

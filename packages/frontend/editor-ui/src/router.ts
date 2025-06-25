@@ -66,6 +66,8 @@ const WorkflowOnboardingView = async () => await import('@/views/WorkflowOnboard
 const EvaluationsView = async () => await import('@/views/Evaluations.ee/EvaluationsView.vue');
 const EvaluationRootView = async () =>
 	await import('@/views/Evaluations.ee/EvaluationsRootView.vue');
+const PrivacyPolicyView = async () => await import('./views/PrivacyPolicyView.vue');
+const TermsOfUseView = async () => await import('./views/TermsOfUseView.vue');
 
 function getTemplatesRedirect(defaultRedirect: VIEWS[keyof VIEWS]): { name: string } | false {
 	const settingsStore = useSettingsStore();
@@ -758,6 +760,20 @@ export const routes: RouteRecordRaw[] = [
 			},
 		},
 	},
+	{
+		path: '/privacy-policy',
+		name: 'PrivacyPolicy',
+		components: {
+			default: PrivacyPolicyView,
+		},
+	},
+	{
+		path: '/terms-of-use',
+		name: 'TermsOfUse',
+		components: {
+			default: TermsOfUseView,
+		},
+	},
 ];
 
 function withCanvasReadOnlyMeta(route: RouteRecordRaw) {
@@ -803,7 +819,7 @@ router.beforeEach(async (to: RouteLocationNormalized, from, next) => {
 		if (settingsStore.showSetupPage) {
 			if (to.name === VIEWS.SETUP) {
 				return next();
-			}
+		}
 
 			return next({ name: VIEWS.SETUP });
 		}
@@ -827,7 +843,7 @@ router.beforeEach(async (to: RouteLocationNormalized, from, next) => {
 
 			if (nextCalled) {
 				return;
-			}
+	}
 		}
 
 		return next();
@@ -836,13 +852,13 @@ router.beforeEach(async (to: RouteLocationNormalized, from, next) => {
 			console.log(failure);
 		} else {
 			console.error(failure);
-		}
+	}
 	}
 });
 
 router.afterEach((to, from) => {
 	try {
-		const telemetry = useTelemetry();
+	const telemetry = useTelemetry();
 		const uiStore = useUIStore();
 		const templatesStore = useTemplatesStore();
 
