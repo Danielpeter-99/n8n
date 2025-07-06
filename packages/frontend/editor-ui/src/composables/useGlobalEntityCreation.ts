@@ -85,7 +85,7 @@ export const useGlobalEntityCreation = () => {
 				{
 					id: CREATE_PROJECT_ID,
 					title: 'Project',
-					disabled: true,
+					disabled: false,
 				},
 			];
 		}
