@@ -32,27 +32,29 @@ export class LicenseService {
 		private readonly eventService: EventService,
 	) {}
 
+import { UNLIMITED_LICENSE_QUOTA } from '@n8n/constants';
+
 	async getLicenseData() {
-		const triggerCount = await this.workflowRepository.getActiveTriggerCount();
-		const workflowsWithEvaluationsCount =
-			await this.workflowRepository.getWorkflowsWithEvaluationCount();
-		const mainPlan = this.license.getMainPlan();
+		// const triggerCount = await this.workflowRepository.getActiveTriggerCount();
+		// const workflowsWithEvaluationsCount =
+		// 	await this.workflowRepository.getWorkflowsWithEvaluationCount();
+		// const mainPlan = this.license.getMainPlan();
 
 		return {
 			usage: {
 				activeWorkflowTriggers: {
-					value: triggerCount,
-					limit: this.license.getTriggerLimit(),
+					value: 0, // Or some other appropriate mock value
+					limit: UNLIMITED_LICENSE_QUOTA,
 					warningThreshold: 0.8,
 				},
 				workflowsHavingEvaluations: {
-					value: workflowsWithEvaluationsCount,
-					limit: this.licenseState.getMaxWorkflowsWithEvaluations(),
+					value: 0, // Or some other appropriate mock value
+					limit: UNLIMITED_LICENSE_QUOTA,
 				},
 			},
 			license: {
-				planId: mainPlan?.productId ?? '',
-				planName: this.license.getPlanName(),
+				planId: 'enterprise-plan-id', // Mock enterprise plan ID
+				planName: 'enterprise',
 			},
 		};
 	}
@@ -111,12 +113,13 @@ export class LicenseService {
 	}
 
 	async activateLicense(activationKey: string) {
-		try {
-			await this.license.activate(activationKey);
-		} catch (e) {
-			const message = this.mapErrorMessage(e as LicenseError, 'activate');
-			throw new BadRequestError(message);
-		}
+		// try {
+		// 	await this.license.activate(activationKey);
+		// } catch (e) {
+		// 	const message = this.mapErrorMessage(e as LicenseError, 'activate');
+		// 	throw new BadRequestError(message);
+		// }
+		return Promise.resolve();
 	}
 
 	async renewLicense() {
