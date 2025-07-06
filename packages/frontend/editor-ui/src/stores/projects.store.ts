@@ -63,8 +63,7 @@ export const useProjectsStore = defineStore(STORES.PROJECTS, () => {
 	const isTeamProjectLimitExceeded = computed(() => false);
 	const canCreateProjects = computed<boolean>(
 		() =>
-			(hasUnlimitedProjects.value ||
-				(isTeamProjectFeatureEnabled.value && !isTeamProjectLimitExceeded.value)) &&
+			(hasUnlimitedProjects.value) &&
 			!sourceControlStore.preferences.branchReadOnly,
 	);
 	const hasPermissionToCreateProjects = computed(() =>
