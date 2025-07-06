@@ -56,21 +56,9 @@ const getIconSize = computed<IconSize>(() => {
 </script>
 
 <template>
-	<div :class="classes" role="alert">
-		<div :class="$style.messageSection">
-			<div v-if="!iconless" :class="$style.icon">
-				<N8nIcon :icon="getIcon" :size="getIconSize" />
-			</div>
-			<N8nText size="small">
-				<slot />
-			</N8nText>
-			&nbsp;
-			<slot name="actions" />
-		</div>
-
-		<slot name="trailingContent" />
-	</div>
+	<template v-if="false" />
 </template>
+
 
 <style lang="scss" module>
 .callout {
