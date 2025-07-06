@@ -194,12 +194,7 @@ export const useGlobalEntityCreation = () => {
 	const handleSelect = (id: string) => {
 		if (id !== CREATE_PROJECT_ID) return;
 
-		if (projectsStore.canCreateProjects && projectsStore.hasPermissionToCreateProjects) {
-			void createProject();
-			return;
-		}
-
-		void usePageRedirectionHelper().goToUpgrade('rbac', 'upgrade-rbac');
+		void createProject(); // Always attempt to create
 	};
 
 	const projectsLimitReachedMessage = computed(() => {
